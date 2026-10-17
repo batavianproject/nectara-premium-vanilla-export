@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NECTARA - Premium Indonesian Gourmet Vanilla Beans. Grade A, Single-Origin, Direct from Source.">
+    <title>NECTARA | Premium Indonesian Vanilla</title>
+    <style>
+        :root {
+            --bg: #0a0806;
+            --bg-elevated: #12100c;
+            --bg-card: #1a1612;
+            --text: #faf8f5;
+            --text-muted: #a8a29a;
+            --text-dim: #6b655c;
+            --accent: #c9a227;
+            --accent-hover: #a8851e;
+            --accent-glow: rgba(201, 162, 39, 0.15);
+            --border: #2a251f;
+            --border-light: #3a352c;
+            --font-serif: 'Georgia', 'Times New Roman', serif;
+            --font-sans: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+            --font-mono: 'Courier New', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: var(--font-serif);
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 8, 6, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(42, 37, 31, 0.5);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            padding: 14px 48px;
+            background: rgba(10, 8, 6, 0.97);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--bg);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-logo-text {
+            font-family: var(--font-serif);
+            font-size: 26px;
+            font-weight: bold;
+            color: var(--text);
+            letter-spacing: 3px;
+            line-height: 1.2;
+        }
+
+        .nav-logo-text .accent {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            background: var(--accent);
+            color: var(--bg) !important;
+            padding: 12px 28px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 140px 40px 100px;
+            background: 
+                radial-gradient(ellipse at 50% 100%, rgba(201, 162, 39, 0.04) 0%, transparent 60%),
+                linear-gradient(180deg, var(--bg) 0%, var(--bg-elevated) 100%);
+        }
+
+        .hero-container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            padding: 8px 20px;
+            border-radius: 2px;
+            margin-bottom: 28px;
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 6vw, 64px);
+            font-weight: bold;
+            color: var(--text);
+            margin-bottom: 24px;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h1 .accent {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: clamp(16px, 2vw, 20px);
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 36px;
+            line-height: 1.7;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg);
+            padding: 18px 36px;
+            border-radius: 4px;
+            font-family: var(--font-sans);
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(201, 162, 39, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            padding: 18px 36px;
+            border-radius: 4px;
+            font-family: var(--font-sans);
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .hero-scroll {
+            margin-top: 48px;
+            font-family: var(--font-sans);
+            font-size: 13px;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .hero-scroll span {
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
+        }
+
+        /* Visual Showcase */
+        .showcase {
+            padding: 80px 40px;
+            background: var(--bg-elevated);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .showcase-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .showcase-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(201, 162, 39, 0.1);
+        }
+
+        .showcase-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .showcase-item .content {
+            padding: 24px;
+        }
+
+        .showcase-item .content h3 {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--text);
+            margin-bottom: 8px;
+            font-family: var(--font-serif);
+        }
+
+        .showcase-item .content p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Quality Section */
+        .quality {
+            padding: 80px 40px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .quality-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 56px;
+        }
+
+        .quality-header h2 {
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: bold;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .quality-header p {
+            color: var(--text-muted);
+            font-size: 17px;
+        }
+
+        .quality-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 28px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .quality-card {
+            text-align: center;
+            padding: 40px 30px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .quality-card:hover {
+            border-color: var(--accent);
+            background: var(--bg-card);
+        }
+
+        .quality-card .icon {
+            font-size: 44px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .quality-card h3 {
+            font-size: 19px;
+            font-weight: bold;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .quality-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .quality-spec {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            max-width: 1000px;
+            margin: 60px auto 0;
+            padding: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .quality-spec-item {
+            text-align: center;
+            padding: 24px;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .quality-spec-item:hover {
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .quality-spec-item .value {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--accent);
+            font-family: var(--font-serif);
+        }
+
+        .quality-spec-item .label {
+            font-size: 13px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 6px;
+        }
+
+        /* Origin Section */
+        .origin {
+            padding: 100px 40px;
+            background: var(--bg-elevated);
+        }
+
+        .origin-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .origin-image {
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 4/3;
+            border: 1px solid var(--border);
+            background: linear-gradient(135deg, var(--bg-card), var(--bg));
+        }
+
+        .origin-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .origin-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(10, 8, 6, 0.8));
+        }
+
+        .origin-float {
+            position: relative;
+            z-index: 2;
+            background: var(--bg-card);
+            padding: 28px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(8px);
+        }
+
+        .origin-float h3 {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .origin-float p {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .origin-float .highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .origin-story {
+            padding: 24px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .origin-text h2 {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .origin-text p {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .origin-text .highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 100px 40px;
+            background: var(--bg);
+        }
+
+        .products-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 64px;
+        }
+
+        .products-header h2 {
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: bold;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .products-header p {
+            color: var(--text-muted);
+            font-size: 17px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(201, 162, 39, 0.12);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+        }
+
+        .product-card .content {
+            padding: 28px;
+        }
+
+        .product-card .price {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--accent);
+            font-family: var(--font-serif);
+            margin: 12px 0;
+        }
+
+        .product-card h3 {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .product-card p {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .product-badge {
+            display: inline-block;
+            background: rgba(201, 162, 39, 0.1);
+            color: var(--accent);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 2px;
+            margin-bottom: 12px;
+        }
+
+        /* Testimonials / Trust */
+        .testimonials {
+            padding: 100px 40px;
+            background: var(--bg-elevated);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .testimonials-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 64px;
+        }
+
+        .testimonials-header h2 {
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: bold;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .testimonials-header p {
+            color: var(--text-muted);
+            font-size: 17px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 28px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 32px;
+            background: var(--bg-card);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--accent);
+        }
+
+        .testimonial-card .quote {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-card .author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .testimonial-card .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-serif);
+            font-weight: bold;
+            color: var(--bg);
+            font-size: 18px;
+        }
+
+        .testimonial-card .author-name {
+            font-weight: bold;
+            color: var(--text);
+            font-size: 15px;
+        }
+
+        .testimonial-card .author-role {
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 40px;
+            background: var(--bg);
+        }
+
+        .contact-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: bold;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+            font-size: 17px;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: grid;
+            gap: 16px;
+        }
+
+        .contact-form input, 
+        .contact-form select {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 16px 20px;
+            font-family: var(--font-serif);
+            font-size: 15px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form select:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.1);
+        }
+
+        .contact-form input::placeholder,
+        .contact-form select::placeholder {
+            color: var(--text-dim);
+        }
+
+        .contact-form button {
+            background: var(--accent);
+            color: var(--bg);
+            padding: 18px 36px;
+            border: none;
+            border-radius: 4px;
+            font-family: var(--font-sans);
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .contact-form button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(201, 162, 39, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 40px;
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+        }
+
+        .footer-col h4 {
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--text);
+            margin-bottom: 16px;
+            font-family: var(--font-sans);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-bottom p {
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 14px 20px;
+            }
+
+            .nav-logo-text {
+                font-size: 20px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .nav-links a {
+                font-size: 11px;
+                letter-spacing: 1px;
+            }
+
+            .nav-cta {
+                padding: 10px 20px;
+                font-size: 11px;
+            }
+
+            .hero {
+                padding: 100px 20px 80px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quality-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .origin-content {
+                grid-template-columns: 1fr;
+            }
+
+            .origin-float {
+                padding: 20px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .hero-ctas .btn-primary,
+            .hero-ctas .btn-secondary {
+                padding: 14px 24px;
+                font-size: 13px;
+            }
+
+            .nav-logo-text {
+                font-size: 16px;
+            }
+
+            .nav-logo-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-logo">
+            <div class="nav-logo-icon">N</div>
+            <div class="nav-logo-text">NECTA<span class="accent">RA</span></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#quality">Hal</a></li>
+            <li><a href="#origin">Asal</a></li>
+            <li><a href="#products">Produk</a></li>
+            <li><a href="#contact">Kontak</a></li>
+        </ul>
+        <a href="#contact" class="nav-cta">Permintaan Sampel</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">Premium Indonesian Vanilla</div>
+            <h1>The Essence of Indonesia,<br> Delivered to Your <span class="accent">Atelier</span>.</h1>
+            <p>Grade A Gourmet Vanilla Beans. Single-Origin. Direct from Source. Uncompromising Quality.</p>
+            <div class="hero-ctas">
+                <a href="#contact" class="btn-primary">Request Discovery Kit</a>
+                <a href="#products" class="btn-secondary">Lihat Produk</a>
+            </div>
+            <div class="hero-scroll">
+                <span>Luaskan</span>
+                <span>→</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Showcase -->
+    <section class="showcase">
+        <div class="showcase-grid">
+            <div class="showcase-item animate-on-scroll">
+                <img src="https://images.unsplash.com/photo-1579025363895-2f9e1edc112c?w=600&q=80" alt="Premium Vanilla Beans">
+                <div class="content">
+                    <h3>Grade A Gourmet Vanilla</h3>
+                    <p>Oily, plump pods with intense bourbon-like aroma. Perfect for luxury confectionery and fragrance.</p>
+                </div>
+            </div>
+            <div class="showcase-item animate-on-scroll">
+                <img src="https://images.unsplash.com/photo-1579025952128-0461f2862507?w=600&q=80" alt="Vanilla Curing Process">
+                <div class="content">
+                    <h3>Slow-Curing Process</h3>
+                    <p>Traditional artisan methods preserve the pure essence of Indonesian terroir and soil.</p>
+                </div>
+            </div>
+            <div class="showcase-item animate-on-scroll">
+                <img src="https://images.unsplash.com/photo-1608288865305-21b73675c649?w=600&q=80" alt="Vanilla Plantation">
+                <div class="content">
+                    <h3>Direct from Source</h3>
+                    <p>Partnering with artisan farmers. Transparent supply chain, honest pricing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Section -->
+    <section class="quality" id="quality">
+        <div class="quality-header">
+            <h2>Kualitas Terbaik,<br>Dijamin</h2>
+            <p>Di bawah standar ketat Grade A, agar produkmu selalu luar biasa.</p>
+        </div>
+        <div class="quality-grid">
+            <div class="quality-card">
+                <span class="icon">🌿</span>
+                <h3>Single-Origin</h3>
+                <p>Dari Papua dan Nusa Tenggara. Setiap batch terverifikasi secara ketat.</p>
+            </div>
+            <div class="quality-card">
+                <span class="icon">📜</span>
+                <h3>Certified Authentic</h3>
+                <p>Phytosanitary & Certificate of Origin. Fasilitas yang selalu sesuai dengan FDA/EU.</p>
+            </div>
+            <div class="quality-card">
+                <span class="icon">🔍</span>
+                <h3>Transparan</h3>
+                <p>Rantai pasok yang jujur. Kamu bisa memverifikasi setiap batch.</p>
+            </div>
+            <div class="quality-card">
+                <span class="icon">🎥</span>
+                <h3>Documented</h3>
+                <p>Video dokumentasi setiap batch. Membuktikan kualitas sejak dari ladang.</p>
+            </div>
+        </div>
+        <div class="quality-spec">
+            <div class="quality-spec-item">
+                <div class="value">30-35%</div>
+                <div class="label">Moisture Content</div>
+            </div>
+            <div class="quality-spec-item">
+                <div class="value">>15cm</div>
+                <div class="label">Pod Length</div>
+            </div>
+            <div class="quality-spec-item">
+                <div class="value">Grade A</div>
+                <div class="label">Gourmet Standard</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Origin Section -->
+    <section class="origin" id="origin">
+        <div class="origin-content">
+            <div class="origin-image">
+                <img src="https://images.unsplash.com/photo-1579025952128-0461f2862507?w=800&q=80" alt="Vanilla Plantation">
+            </div>
+            <div class="origin-text">
+                <h2>From the Soil of Indonesia to Your Atelier</h2>
+                <p>We partner directly with artisan farmers who preserve the ancient art of slow-curing vanilla. No <span class="highlight">additives</span>. No <span class="highlight">shortcuts</span>. Just the pure essence of the tropics.</p>
+                <p>At <span class="highlight">NECTARA</span>, we believe vanilla is not just an ingredient. It's a <span class="highlight">story</span> of the land, the farmer, and the craft.</p>
+                <p class="origin-story">"The soil, the climate, the patience. All elements converge to create something extraordinary."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="products-header">
+            <h2>Rekomendasi Produk Nectara</h2>
+            <p>Diharapkan untuk konfitur mewah, rumah pembersih, dan rumah wangi.</p>
+        </div>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-badge">Grade A Premium</div>
+                <div class="content">
+                    <div class="price">$300 / kg</div>
+                    <h3>Premium Vanilla Beans</h3>
+                    <p>Grade A gourmet beans, volume 25-50kg/bulan. Langsung dari sumber. Volume terkontrol untuk kualitas terbaik.</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-badge">Free Sample</div>
+                <div class="content">
+                    <div class="price">$65 - $125</div>
+                    <h3>Discovery Kit</h3>
+                    <p>3-5 peti vanili premium + sertifikat + buku cerita + panduan infus. Gratis dikirim.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials / Trust -->
+    <section class="testimonials">
+        <div class="testimonials-header">
+            <h2>Testimoni</h2>
+            <p>Tetangga mereka yang telah berhasil bekerja sama dengan kami.</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="quote">"Kualitas vanili yang luar biasa. Aroma yang sangat kuat dan plump. Sudah merekomendasikan Nectara ke beberapa klien saya."</div>
+                <div class="author">
+                    <div class="avatar">MC</div>
+                    <div>
+                        <div class="author-name">Marcus Chen</div>
+                        <div class="author-role">Executive Pastry Chef, Michelin-star Restaurant</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="quote">"Rantai pasok yang transparan dan konsisten. Saya sangat puas dengan kualitas vanili Nectara. Sangat merekomendasikan."</div>
+                <div class="author">
+                    <div class="avatar">JL</div>
+                    <div>
+                        <div class="author-name">Julia Laurent</div>
+                        <div class="author-role">Niche Perfumer, Paris</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="quote">"Ditemukan sebagai mitra ideal untuk produk premiumnya. Kualitas menjaga, harga yang adil, komunikasi yang jelas."</div>
+                <div class="author">
+                    <div class="avatar">SR</div>
+                    <div>
+                        <div class="author-name">Sarah Richardson</div>
+                        <div class="author-role">Procurement Manager, Artisan Food Importers</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <h2>Minta Sampel Gratis</h2>
+            <p>Kirimkan formulir ini untuk menerima paket pengalaman gratis sebagai mitra berkualitas.</p>
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Terima kasih! Kami akan menghubungi Anda dalam 24 jam.');">
+                <input type="text" placeholder="Nama Anda" required>
+                <input type="text" placeholder="Nama Perusahaan">
+                <select required>
+                    <option value="">Pilih Role</option>
+                    <option value="chef">Executive Pastry Chef</option>
+                    <option value="perfumer">Boutique Perfumer</option>
+                    <option value="distributor">Premium Ingredient Distributor</option>
+                    <option value="other">Other Role</option>
+                </select>
+                <input type="email" placeholder="Alamat Email" required>
+                <input type="text" placeholder="Negara">
+                <button type="submit">Kirim Permintaan</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>NECTARA</h4>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
+                    Premium Indonesian Gourmet Vanilla.<br>
+                    Quality Above All.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigasi</h4>
+                <ul>
+                    <li><a href="#quality">Hal</a></li>
+                    <li><a href="#origin">Asal</a></li>
+                    <li><a href="#products">Produk</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Hubungi Kami</h4>
+                <ul>
+                    <li>Email: info@nectara.id</li>
+                    <li>WhatsApp: +62 812-3456-7890</li>
+                    <li>Alamat: Jakarta, Indonesia</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Ikuti Kami</h4>
+                <div class="footer-social">
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">𝕏</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 NECTARA. All rights reserved.</p>
+            <p>PT Perorangan | OSS RBA | NIB Registered</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+
